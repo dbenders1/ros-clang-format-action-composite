@@ -5,20 +5,20 @@ inputs:
   author-name:
     description: 'The name that will appear in commits when changes need to be committed'
     required: false
-    default: "Format Bot"
+    default: Format Bot
   author-email:
     description: 'The email address that will appear in commits when changes need to be committed'
     required: false
-    default: "formatter@github.bot"
+    default: formatter@github.bot
   commit-message:
     description: 'The commit message used when changes need to be committed'
     required: false
-    default: "Style: format *.h, *.hpp and *.cpp files according to ROS C++ style"
+    default: 'Style: format *.h, *.hpp and *.cpp files according to ROS C++ style'
 runs:
   using: "composite"
   steps:
     - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
       shell: bash  
-    - run: format.sh ${{ inputs.author-name }} ${{ inputs.author-email }} ${{ inputs.commit-message }}
+    - run: format.sh "${{ inputs.author-name }}" "${{ inputs.author-email }}" "${{ inputs.commit-message }}"
     # - run: format.sh
       shell: bash
