@@ -5,11 +5,11 @@ inputs:
   author-name:
     description: 'The name that will appear in commits when changes need to be committed'
     required: false
-    default: Format Bot
+    default: 'Format Bot'
   author-email:
     description: 'The email address that will appear in commits when changes need to be committed'
     required: false
-    default: formatter@github.bot
+    default: 'formatter@github.bot'
   commit-message:
     description: 'The commit message used when changes need to be committed'
     required: false
