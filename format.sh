@@ -2,7 +2,7 @@
 
 name=$1
 email=$2
-message=$3
+message_title=$3
 
 apply_style(){
   find . -name '*.h' -or -name '*.hpp' -or -name '*.cpp' | xargs clang-format-10 -i -style=file --verbose $1
@@ -28,6 +28,7 @@ if [[ $? == 0 ]] ;then
   echo "============================"
   echo "Committing to Current Branch"
   echo "============================"
+  message=message_title+="\n\nDescription goes here"
   sudo git commit -a -m "$message"
   sudo git push
 else
