@@ -17,5 +17,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: format.sh -${{ inputs.author-name }} -${{ inputs.author-email }} -${{ inputs.commit-message }}
+    # - run: format.sh -${{ inputs.author-name }} -${{ inputs.author-email }} -${{ inputs.commit-message }}
+    - run: format.sh
       shell: bash
