@@ -1,12 +1,12 @@
 #!/bin/bash
 
-name=$INPUT_AUTHOR_NAME
-email=$INPUT_AUTHOR_EMAIL
-message=$INPUT_COMMIT_MESSAGE
+name=$1
+email=$2
+message=$3
 
-echo $name
-echo $email
-echo $message
+echo $1
+echo $2
+echo $3
 
 apply_style(){
   find . -name '*.h' -or -name '*.hpp' -or -name '*.cpp' | xargs clang-format-10 -i -style=file --verbose $1
