@@ -4,23 +4,27 @@ name=$INPUT_AUTHOR_NAME
 email=$INPUT_AUTHOR_EMAIL
 message=$INPUT_COMMIT_MESSAGE
 
+echo $name
+echo $email
+echo $message
+
 apply_style(){
   find . -name '*.h' -or -name '*.hpp' -or -name '*.cpp' | xargs clang-format-10 -i -style=file --verbose $1
 }
 
-apt-get update
-apt-get install -y clang-format-10 git
+sudo apt-get update
+sudo apt-get install -y clang-format-10 git
 
 echo "======================="
 echo "Applying style to files"
 echo "======================="
-apply_style
+sudo apply_style
 
-git config --global user.name "$name"
-git config --global user.email "$email"
-git config --global push.default current
+sudo git config --global user.name "$name"
+sudo git config --global user.email "$email"
+sudo git config --global push.default current
 
-modified_files=$(git status | grep modified)
+modified_files=$(sudo git status | grep modified)
 
 if [[ $? == 0 ]] ;then
   echo $modified_files
@@ -28,8 +32,8 @@ if [[ $? == 0 ]] ;then
   echo "============================"
   echo "Committing to Current Branch"
   echo "============================"
-  git commit -a -m "$message"
-  git push
+  sudo git commit -a -m "$message"
+  sudo git push
 else
   echo "No changes to commit"
 fi
