@@ -18,7 +18,7 @@ sudo apt-get install -y clang-format-10 git
 echo "======================="
 echo "Applying style to files"
 echo "======================="
-sudo apply_style
+apply_style
 
 sudo git config --global user.name "$name"
 sudo git config --global user.email "$email"
