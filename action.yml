@@ -23,5 +23,5 @@ runs:
   steps:
     - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
       shell: bash  
-    - run: format.sh "${{ inputs.check-only-or-commit }}" "${{ inputs.author-name }}" "${{ inputs.author-email }}" "${{ inputs.commit-message }}"
+    - run: format.sh "${{ inputs.author-name }}" "${{ inputs.author-email }}" "${{ inputs.commit-message }}" "${{ inputs.check-only-or-commit }}"
       shell: bash

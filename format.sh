@@ -1,20 +1,20 @@
 #!/bin/bash
 
 # Process script inputs
-name=$2
-email=$3
-message_title=$4
-if [[ $1 == 'check-only' ]]; then
+name=$1
+email=$2
+message_title=$3
+if [[ $4 == 'check-only' ]]; then
   do_commit=0
-  echo "Formatting and failing in case code is not properly formatted"
-elif [[ $1 == 'commit' ]]; then
+  echo "Action input 'check-only-or-commit' set to 'check-only': formatting and failing in case code is not properly formatted"
+elif [[ $4 == 'commit' ]]; then
   do_commit=1
-  echo "Formatting and, if necessary, committing and pushing code to the repository with:
+  echo "Action input 'check-only-or-commit' set to 'commit': formatting and, if necessary, committing and pushing code to the repository with:
 - Author name: $name
 - Author email: $email
 - Commit message title: $message_title"
 else
-  echo "GitHub Action input 'check-only-or-commit' takes either of the following arguments: ['check-only', 'commit']!"
+  echo "Action input 'check-only-or-commit' takes either of the following arguments: ['check-only', 'commit']!"
   echo "Exiting"
   exit 1
 fi
