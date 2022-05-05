@@ -3,7 +3,7 @@
 # Process script inputs
 name=$1
 email=$2
-if [[ $3 == 'check-only']]; then
+if [[ $3 == 'check-only' ]]; then
   do_commit=0
 elif [[ $3 == 'commit' ]]; then
   do_commit=1
