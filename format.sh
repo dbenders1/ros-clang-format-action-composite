@@ -10,10 +10,6 @@ apply_style(){
   find . -name '*.h' -or -name '*.hpp' -or -name '*.cpp' | xargs clang-format-10 -i -style=file --verbose $1
 }
 
-# Install packages
-sudo apt-get update
-sudo apt-get install -y clang-format-10
-
 # Git configuration
 sudo git config --global user.name "$name"
 sudo git config --global user.email "$email"
