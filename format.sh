@@ -31,7 +31,7 @@ exit_code=$?
 
 # If last command was executed successfully (exit status 0): print modified files, commit and push
 if [[ $exit_code == 0 ]]; then
-  message_mod_files="Edited files:"
+  message_mod_files="Modified files:"
   read -ramod_files<<< "$modified_files"
   for file in "${mod_files[@]}"; do
     message_mod_files+="
@@ -44,7 +44,6 @@ if [[ $exit_code == 0 ]]; then
   echo "============================"
   echo "Committing to Current Branch"
   echo "============================"
-  echo
 
   sudo git commit -a -m "$message_title" -m "$message_mod_files"
   sudo git push
