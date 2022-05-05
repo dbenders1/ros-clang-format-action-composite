@@ -29,24 +29,23 @@ apply_style
 modified_files=$(sudo git diff --name-only | xargs)
 
 if [[ $? == 0 ]]; then
-  mod_files_message="Edited files:"
+  message_mod_files="Edited files:"
   read -rasplitLineIFS<<< "$modified_files"
   for file in "${splitLineIFS[@]}"; do
     echo $file
-    mod_files_message+="\n- "
-    mod_files_message+=$file
+    # message_mod_files+="\n- "
+    message_mod_files+=$file
   done
-  echo $mod_files_message
+  echo $message_mod_files
 
   echo
   echo "============================"
   echo "Committing to Current Branch"
   echo "============================"
   echo
-  message+=$message_title
-  message+="\n\n"
-  message+=$mod_files_message
-  sudo git commit -a -m "$message"
+  # message+=$message_title
+  # message+=$message_mod_files
+  sudo git commit -a -m "$message_title" -m $message_mod_files
   sudo git push
 else
   echo "No changes to commit"
