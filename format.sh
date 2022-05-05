@@ -12,7 +12,7 @@ apply_style(){
 
 # Install packages
 sudo apt-get update
-sudo apt-get install -y clang-format-10 git
+sudo apt-get install -y clang-format-10
 
 # Git configuration
 sudo git config --global user.name "$name"
@@ -47,6 +47,7 @@ if [[ $exit_code == 0 ]]; then
 
   sudo git commit -a -m "$message_title" -m "$message_mod_files"
   sudo git push
+# If last command failed (exit status != 0): print error message and exit
 else
   echo "Running command 'modified_files=\$(sudo git diff --name-only | xargs)' was not successful and exited with code $exit_code"
   echo "Exiting"
