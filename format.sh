@@ -7,13 +7,8 @@ message_title=$3
 
 # Function to apply clang-format
 apply_style(){
-  # find . -name '*.h' -or -name '*.hpp' -or -name '*.cpp' | xargs clang-format-10 -i -style=file --verbose $1
-  find . -name '*.h' -or -name '*.hpp' -or -name '*.cpp' | xargs clang-format-9 -i -style=file --verbose $1
+  find . -name '*.h' -or -name '*.hpp' -or -name '*.cpp' | xargs clang-format -i -style=file --verbose $1
 }
-
-# Install packages
-sudo apt-get update
-sudo apt-get install -y clang-format-9
 
 # Git configuration
 sudo git config --global user.name "$name"
