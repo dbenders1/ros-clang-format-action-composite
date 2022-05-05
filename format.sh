@@ -55,7 +55,7 @@ if [[ $exit_code == 0 ]]; then
   echo
   echo "$message_mod_files"
 
-  if [[ $do_commit == 0 ]]; then
+  if [[ $do_commit -eq 0 ]]; then
     if [[ $modified_files ]]; then
       echo
       echo "Files modified after formatting"
@@ -68,7 +68,7 @@ if [[ $exit_code == 0 ]]; then
       echo "CHECK PASSED!"
       exit 0
 
-  elif [[ $do_commit == 1 ]]; then
+  elif [[ $do_commit -eq 1 ]]; then
     echo
     echo "============================"
     echo "Committing to Current Branch"
