@@ -27,7 +27,7 @@ apply_style
 
 # Determine modified files using Git
 modified_files=$(sudo git diff --name-only | xargs)
-exit_code=1
+exit_code=$?
 
 # If last command was executed successfully (exit status 0): print modified files, commit and push
 if [[ $exit_code == 0 ]]; then
