@@ -1,18 +1,23 @@
 #!/bin/bash
 
 # Process script inputs
-name=$1
-email=$2
-if [[ $3 == 'check-only' ]]; then
+name=$2
+email=$3
+message_title=$4
+if [[ $1 == 'check-only' ]]; then
   do_commit=0
-elif [[ $3 == 'commit' ]]; then
+  echo "Formatting and failing in case code is not properly formatted"
+elif [[ $1 == 'commit' ]]; then
   do_commit=1
+  echo "Formatting and, if necessary, committing and pushing code to the repository with:
+- Author name: $name
+- Author email: $email
+- Commit message title: $message_title"
 else
   echo "GitHub Action input 'check-only-or-commit' takes either of the following arguments: ['check-only', 'commit']!"
   echo "Exiting"
   exit 1
 fi
-message_title=$4
 
 # Function to apply clang-format
 apply_style(){
