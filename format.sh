@@ -34,7 +34,7 @@ if [[ $? == 0 ]]; then
   for file in "${splitLineIFS[@]}"; do
     # message_mod_files+="\n- "
     message_mod_files+="
-    $file"
+- $file"
   done
   echo $message_mod_files
 
