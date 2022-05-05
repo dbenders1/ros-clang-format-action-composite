@@ -67,6 +67,7 @@ if [[ $exit_code == 0 ]]; then
       echo "No modified files after formatting"
       echo "CHECK PASSED!"
       exit 0
+    fi
 
   elif [[ $do_commit -eq 1 ]]; then
     echo
@@ -82,5 +83,5 @@ if [[ $exit_code == 0 ]]; then
 else
   echo "Running command 'modified_files=\$(sudo git diff --name-only | xargs)' was not successful and exited with code $exit_code!"
   echo "Exiting"
-  exit 1
+  exit $exit_code
 fi
