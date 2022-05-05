@@ -32,9 +32,9 @@ if [[ $? == 0 ]]; then
   message_mod_files="Edited files:"
   read -rasplitLineIFS<<< "$modified_files"
   for file in "${splitLineIFS[@]}"; do
-    echo $file
     # message_mod_files+="\n- "
-    message_mod_files+=$file
+    message_mod_files+="
+    $file"
   done
   echo $message_mod_files
 
@@ -45,7 +45,7 @@ if [[ $? == 0 ]]; then
   echo
   # message+=$message_title
   # message+=$message_mod_files
-  sudo git commit -a -m "$message_title" -m $message_mod_files
+  sudo git commit -a -m "$message_title" -m "$message_mod_files"
   sudo git push
 else
   echo "No changes to commit"
