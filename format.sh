@@ -45,38 +45,39 @@ exit_code=$?
 
 # If last command was executed successfully (exit status 0): check modified files (do_commit=0) or commit and push modified files (if do_commit=1)
 if [[ $exit_code == 0 ]]; then
-  message_mod_files="Modified files:"
-  read -ramod_files<<< "$modified_files"
-  for file in "${mod_files[@]}"; do
-    message_mod_files+="
+  if [[ $modified_files ]]; then
+    message_mod_files="Modified files:"
+    read -ramod_files<<< "$modified_files"
+    for file in "${mod_files[@]}"; do
+      message_mod_files+="
 - $file"
-  done
+    done
 
-  echo
-  echo "$message_mod_files"
+    echo
+    echo "$message_mod_files"
 
-  if [[ $do_commit -eq 0 ]]; then
-    if [[ $modified_files ]]; then
+    if [[ $do_commit -eq 0 ]]; then
       echo
       echo "Files modified after formatting"
       echo "Please format code before pushing to the repository"
       echo "CHECK FAILED"
       exit 1
-    else
+
+    elif [[ $do_commit -eq 1 ]]; then
       echo
-      echo "No modified files after formatting"
-      echo "CHECK PASSED"
-      exit 0
+      echo "============================"
+      echo "Committing to Current Branch"
+      echo "============================"
+
+      sudo git commit -a -m "$message_title" -m "$message_mod_files"
+      sudo git push
     fi
 
-  elif [[ $do_commit -eq 1 ]]; then
+  else
     echo
-    echo "============================"
-    echo "Committing to Current Branch"
-    echo "============================"
-
-    sudo git commit -a -m "$message_title" -m "$message_mod_files"
-    sudo git push
+    echo "No modified files after formatting"
+    echo "CHECK PASSED"
+    exit 0
   fi
 
 # If last command failed (exit status != 0): print error message and exit
