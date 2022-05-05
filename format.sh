@@ -3,7 +3,16 @@
 # Process script inputs
 name=$1
 email=$2
-message_title=$3
+if [[ $3 == 'check-only']]; then
+  do_commit=0
+elif [[ $3 == 'commit' ]]; then
+  do_commit=1
+else
+  echo "GitHub Action input 'check-only-or-commit' takes either of the following arguments: ['check-only', 'commit']!"
+  echo "Exiting"
+  exit 1
+fi
+message_title=$4
 
 # Function to apply clang-format
 apply_style(){
@@ -45,7 +54,7 @@ if [[ $exit_code == 0 ]]; then
   sudo git push
 # If last command failed (exit status != 0): print error message and exit
 else
-  echo "Running command 'modified_files=\$(sudo git diff --name-only | xargs)' was not successful and exited with code $exit_code"
+  echo "Running command 'modified_files=\$(sudo git diff --name-only | xargs)' was not successful and exited with code $exit_code!"
   echo "Exiting"
   exit 1
 fi
