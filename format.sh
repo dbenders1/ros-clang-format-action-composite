@@ -25,28 +25,31 @@ echo "Applying style to files"
 echo "======================="
 apply_style
 
-# Determine and print modified files
+# Determine modified files using Git
 modified_files=$(sudo git diff --name-only | xargs)
+exit_code = $?
 
-if [[ $? == 0 ]]; then
+# If last command was executed successfully (exit status 0): print modified files, commit and push
+if [[ $exit_code == 0 ]]; then
   message_mod_files="Edited files:"
-  read -rasplitLineIFS<<< "$modified_files"
-  for file in "${splitLineIFS[@]}"; do
-    # message_mod_files+="\n- "
+  read -ramod_files<<< "$modified_files"
+  for file in "${mod_files[@]}"; do
     message_mod_files+="
 - $file"
   done
-  echo $message_mod_files
 
+  echo
+  echo "$message_mod_files"
   echo
   echo "============================"
   echo "Committing to Current Branch"
   echo "============================"
   echo
-  # message+=$message_title
-  # message+=$message_mod_files
+
   sudo git commit -a -m "$message_title" -m "$message_mod_files"
   sudo git push
 else
-  echo "No changes to commit"
+  echo "Running command 'modified_files=\$(sudo git diff --name-only | xargs)' was not successful and exited with code $exit_code"
+  echo "Exiting"
+  exit 1
 fi
