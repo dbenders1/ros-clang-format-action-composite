@@ -41,7 +41,7 @@ apply_style
 
 # Determine modified files using Git
 modified_files=$(sudo git diff --name-only | xargs)
-exit_code=$?
+exit_code=127
 
 # If last command was executed successfully (exit status 0): check modified files (do_commit=0) or commit and push modified files (if do_commit=1)
 if [[ $exit_code == 0 ]]; then
@@ -60,12 +60,12 @@ if [[ $exit_code == 0 ]]; then
       echo
       echo "Files modified after formatting"
       echo "Please format code before pushing to the repository"
-      echo "CHECK FAILED!"
+      echo "CHECK FAILED"
       exit 1
     else
       echo
       echo "No modified files after formatting"
-      echo "CHECK PASSED!"
+      echo "CHECK PASSED"
       exit 0
     fi
 
